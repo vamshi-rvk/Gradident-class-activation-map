@@ -3,6 +3,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 
 kivy.require("1.10.1")
 
@@ -12,7 +13,7 @@ class ConnectPage(GridLayout):
 
         super().__init__(**kwargs)
 
-        self.cols = 4
+        self.cols = 2
         self.add_widget(Label(text = "IP:"))
         self.ip = TextInput(multiline = True)
         self.add_widget(self.ip)
@@ -24,9 +25,10 @@ class ConnectPage(GridLayout):
         self.username = TextInput(multiline = True)
         self.add_widget(self.username)
 
-        self.add_widget(Label(text = "feild 4"))
-        self.extra = TextInput(multiline = True)
-        self.add_widget(self.extra)
+        self.join = Button(text = "Join")
+        self.add_widget(Label())
+        self.add_widget(self.join)
+
 
 
 class EpicApp(App):

@@ -26,12 +26,13 @@ pooled_grads = K.mean(grads, axis=(0, 1, 2)) #GAP of gradients
 
 iterate = K.function([model.input], [pooled_grads, last_conv_layer.output[0]])
 pooled_grads_value, conv_layer_output_value = iterate([x]) # gives gradients and its respective feature map
-
+layer_filter = conv_layer_output_value.shape[2]
+print(layer_filter)
 for i in range(64):
     conv_layer_output_value[:, :, i] *= pooled_grads_value[i] # multiplying GAPgradient with its respective feature map
 # heatmap = np.mean(conv_layer_output_value, axis=-1)
 
-heatmap = np.sum(conv_layer_output_value, axis=-1) #summuation of featuremaps to give discriminative saliency maps
+heatmap = np.sum(conv_layer_output_value, axis=-1) #summation of featuremaps to give discriminative saliency maps
 
 heatmap = np.maximum(heatmap, 0) # Relu
 
